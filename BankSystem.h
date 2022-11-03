@@ -3,8 +3,10 @@
 #include <vector>
 #include <string>
 #include <regex>
+#include <fstream>
 
 using namespace std;
+
 
 class BankApp
 {
@@ -12,19 +14,43 @@ protected:
 
 
 public:
+	void menu();
+	void addClient();
+	void List();
+	void withdraw();
+	void deposit();
 	BankApp();
-	~BankApp();
+	virtual ~BankApp() {
+
+	}
 };
 
 class BankAcc
 {
 
 protected:
+	vector<string> accID;
+	vector<double> balance;
+	vector<bool> accType;
 
 public:
-	BankAcc();
-	~BankAcc();
+	BankAcc() {
 
+	}
+	virtual ~BankAcc() {
+
+	}
+	void setAccID(string id);
+	void setBalance(double bal);
+	void setAccType(bool type);
+	string getAccID();
+	double getBalance();
+	bool getAccType();
+	int withdraw(double amount);
+	int deposit(double amount);
+	bool isFoundAccID(string id);
+	
+	
 
 
 };
@@ -32,22 +58,36 @@ public:
 class SavingBankAcc :public BankAcc
 {
 protected:
-
-
+	double minimumBalance, minimumWithdraw;
 public:
-	SavingBankAcc ();
-	~SavingBankAcc ();
+	SavingBankAcc() {
+		minimumBalance = 1000.0;
+		minimumWithdraw = 100.0;
+	}
+	virtual ~SavingBankAcc() {
+
+	}
 
 };
 
 class Client
 {
 protected:
+	vector<string> name, address, phone;
 
 public:
-	Client();
-	~Client();
+	Client() {
 
+	}
+	virtual ~Client() {
 
+	}
+	void setName(string n);
+	void setAddress(string a);
+	void setPhone(string p);
+	string getName();
+	string getAddress();
+	string getPhone();
+	bool isValidPhoneNumber(string p);
 };
 
