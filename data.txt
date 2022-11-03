@@ -1,6 +1,0 @@
-acc ID
-acc type
-acc balance
-client name
-client address
-clieent phone

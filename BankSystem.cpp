@@ -3,6 +3,7 @@
 //_______________________________BankApp___________________________________
 void BankApp::menu()
 {
+	BankApp bank;
 	int choice;
 	while (true)
 	{
@@ -24,7 +25,7 @@ void BankApp::menu()
 	{
 	case 1:
 	{
-
+		bank.addClient();
 	}
 	case 2:
 	{
