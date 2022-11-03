@@ -41,18 +41,85 @@ void BankApp::menu()
 	default:
 		break;
 	}
-	
+
 }
 
 void BankApp::addClient()
 {
-
+	string name, address, phone, accID;
+	bool accType;
+	double balance;
+	Client c;
+	BankAcc ba(c);
+	SavingBankAcc s(c);
+	cout << "Please Enter Client Name =========> ";
+	cin.ignore();
+	getline(cin, name);
+	c.setName(name);
+	cout << "Please Enter Client Address =======> ";
+	cin.ignore();
+	getline(cin, address);
+	c.setAddress(address);
+	while (true)
+	{
+		cout << "Please Enter Client Phone =======> ";
+		cin >> phone;
+		if (c.isValidPhoneNumber(phone)) {
+			c.setPhone(phone);
+			break;
+		}
+		else
+		{
+			cout << "invalid Phone number!!\n";
+		}
+	}
+	while (true)
+	{
+		cout << "What Type of Account Do You Like? (1) Basic (2) Saving – Type 1 or 2 =========> ";
+		cin >> accType;
+		if (accType == 1) {
+			break;
+			ba.setAccType(1);
+		}
+		else if (accType == 2) {
+			break;
+			ba.setAccType(2);
+		}
+		else
+		{
+			cout << "invalid Account type!!\n";
+		}
+	}
+	if (accType == 1) {
+		cout << "Please Enter the Starting Balance =========> ";
+		cin >> balance;
+	}
+	else
+	{
+		while (true)
+		{
+			cout << "Please Enter the Starting Balance =========> ";
+			cin >> balance;
+			if (balance < s.getMiniBalace())
+			{
+				cout << "this is less than the starting balance!!\n";
+			}
+			else
+			{
+				ba.setBalance(balance);
+			}
+		}
+	}
+	ba.setAccID("FCAI-" + to_string(bankAcc.size() + 1));
+	bankAcc.push_back(ba);
+	bankAcc.size();
+	cout << "An account was created with ID" << ba.getAccID() << " and Starting Balance " << balance << " L.E. ";
 }
 
 void BankApp::List()
 {
-	for(int i=0;i<bankAcc.size();i++){
-		
+	for (int i = 0; i < bankAcc.size(); i++) {
+
 	}
 }
 
@@ -68,7 +135,7 @@ void BankApp::deposit()
 
 BankApp::BankApp()
 {
-	
+
 	fstream dataFile;
 	string temp = "";
 	dataFile.open("data.txt", ios::in);
@@ -80,6 +147,7 @@ BankApp::BankApp()
 		}
 	}
 	bankAcc.resize(count / 6);
+
 	temp = "";
 	int i = 0;
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
@@ -99,13 +167,15 @@ BankApp::BankApp()
 	}
 	dataFile.close();
 }
-//___________________________________BankAcc________________________________
-BankAcc::BankAcc(Client& client){
+
+
+BankAcc::BankAcc(Client& client)
+{
 	this->client = &client;
 }
 //-------------------------SETTER
 void BankAcc::setAccID(string id)
-{	
+{
 	accID = id;
 }
 
@@ -139,7 +209,7 @@ Client* BankAcc::get_client()
 	return client;
 }
 //----------------------func
-int BankAcc::withdraw(double amount) 
+int BankAcc::withdraw(double amount)
 {
 	return 0;
 }

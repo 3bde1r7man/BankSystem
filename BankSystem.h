@@ -34,6 +34,7 @@ protected:
 	bool accType;
 
 public:
+	//___________________________________BankAcc________________________________
 	BankAcc(Client& client);
 	virtual ~BankAcc() {
 
@@ -48,8 +49,8 @@ public:
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
 	bool isFoundAccID(string id);
-	
-	
+
+
 
 
 };
@@ -59,7 +60,7 @@ class SavingBankAcc :public BankAcc
 private:
 	double minimumBalance, minimumWithdraw;
 public:
-	SavingBankAcc(Client& client): BankAcc(client){
+	SavingBankAcc(Client& client) : BankAcc(client) {
 		minimumBalance = 1000.0;
 		minimumWithdraw = 100.0;
 	}
@@ -68,7 +69,12 @@ public:
 	virtual ~SavingBankAcc() {
 
 	}
-
+	int getMiniBalace() {
+		return minimumBalance;
+	}
+	int getMIniWithdraw() {
+		return minimumWithdraw;
+	}
 };
 
 class Client
