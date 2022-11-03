@@ -185,7 +185,7 @@ void BankAcc::setBalance(double bal)
 	balance = bal;
 }
 
-void BankAcc::setAccType(bool type)
+void BankAcc::setAccType(int type)
 {
 	accType = type;
 }
@@ -200,7 +200,7 @@ double BankAcc::getBalance()
 	return balance;
 }
 
-bool BankAcc::getAccType()
+int BankAcc::getAccType()
 {
 	return accType;
 }

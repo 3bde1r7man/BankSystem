@@ -47,10 +47,10 @@ public:
 	}
 	void setAccID(string id);
 	void setBalance(double bal);
-	void setAccType(bool type);
+	void setAccType(int type);
 	string getAccID();
 	double getBalance();
-	bool getAccType();
+	int getAccType();
 	Client* get_client();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
