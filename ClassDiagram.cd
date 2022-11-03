@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BankApp">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAACAAAAAAAAgAAAAABAAAAAAAAgAAAgI=</HashCode>
       <FileName>BankSystem.h</FileName>
@@ -10,7 +10,7 @@
   <Class Name="BankAcc">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAQAIAgAQAAAAAAAAAIgAAABAABAAACAgAAAYA=</HashCode>
+      <HashCode>IAAIAAAQAIAgAQAAAAAAAAAIgAAABAABAAACAgAAAYA=</HashCode>
       <FileName>BankSystem.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Client">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAgAAAAAAAAAAAAAAIEAABgAAIkIgAAAAQ=</HashCode>
       <FileName>BankSystem.h</FileName>
