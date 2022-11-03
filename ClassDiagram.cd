@@ -1,9 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BankApp" Collapsed="true">
+  <Class Name="BankApp">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAACAAAAAAAAgAAAAABAAAAAAAAgAAAgI=</HashCode>
+      <FileName>BankSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankAcc">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAQAIAgAQAAAAAAAAAIgAAABAABAAACAgAAAYA=</HashCode>
+      <FileName>BankSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SavingBankAcc">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAIAAAAEAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BankSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Client">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAgAAAAAAAAAAAAAAIEAABgAAIkIgAAAAQ=</HashCode>
       <FileName>BankSystem.h</FileName>
     </TypeIdentifier>
   </Class>
