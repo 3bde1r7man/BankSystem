@@ -66,36 +66,53 @@ void BankApp::deposit()
 
 BankApp::BankApp()
 {
+	
 	fstream dataFile;
-	string temp;
+	string temp = "";
 	dataFile.open("data.txt", ios::in);
-	/*while (!dataFile.eof() && dataFile.peek() != EOF) {
+	int count{ 0 };
+	while (!dataFile.eof())
+	{
+		if (getline(dataFile, temp)) { // Count lines
+			count++;
+		}
+	}
+	bankAcc.resize(count / 6);
+	client.resize(count / 6);
+	temp = "";
+	int i = 0;
+	while (!dataFile.eof() && dataFile.peek() != EOF) {
 		getline(dataFile, temp);
-		
+		bankAcc[i].setAccID(temp);
 		getline(dataFile, temp);
-		emails.push_back(temp);
+		bankAcc[i].setAccType(bool(stoi(temp)));
 		getline(dataFile, temp);
-		phoneNumbers.push_back(temp);
+		bankAcc[i].setBalance(stod(temp));
 		getline(dataFile, temp);
-		passwords.push_back(temp);
-	}*/
+		client[i].setName(temp);
+		getline(dataFile, temp);
+		client[i].setAddress(temp);
+		getline(dataFile, temp);
+		client[i].setPhone(temp);
+		i++;
+	}
 	dataFile.close();
 }
 //___________________________________BankAcc________________________________
 //-------------------------SETTER
 void BankAcc::setAccID(string id)
 {	
-	accID.push_back(id);
+	accID = id;
 }
 
 void BankAcc::setBalance(double bal)
 {
-	balance.push_back(bal);
+	balance = bal;
 }
 
 void BankAcc::setAccType(bool type)
 {
-	accType.push_back(type);
+	accType = type;
 }
 //-----------------------GETTER
 string BankAcc::getAccID()
@@ -132,17 +149,17 @@ bool BankAcc::isFoundAccID(string id)
 //-------------------------SETTER
 void Client::setName(string n)
 {
-	name.push_back(n);
+	name = n;
 }
 
 void Client::setAddress(string a)
 {
-	address.push_back(a);
+	address = a;
 }
 
 void Client::setPhone(string p)
 {
-	phone.push_back(p);
+	phone = p;
 }
 //-----------------------GETTER
 string Client::getName()

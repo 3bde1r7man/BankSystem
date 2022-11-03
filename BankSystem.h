@@ -10,9 +10,9 @@ using namespace std;
 
 class BankApp
 {
-protected:
-
-
+private:
+	vector<BankAcc> bankAcc;
+	vector<Client> client;
 public:
 	void menu();
 	void addClient();
@@ -29,9 +29,9 @@ class BankAcc
 {
 
 protected:
-	vector<string> accID;
-	vector<double> balance;
-	vector<bool> accType;
+	string accID;
+	double balance;
+	bool accType;
 
 public:
 	BankAcc() {
@@ -57,7 +57,7 @@ public:
 
 class SavingBankAcc :public BankAcc
 {
-protected:
+private:
 	double minimumBalance, minimumWithdraw;
 public:
 	SavingBankAcc() {
@@ -72,8 +72,8 @@ public:
 
 class Client
 {
-protected:
-	vector<string> name, address, phone;
+private:
+	string name, address, phone;
 
 public:
 	Client() {
