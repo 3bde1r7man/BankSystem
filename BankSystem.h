@@ -12,7 +12,6 @@ class BankApp
 {
 private:
 	vector<BankAcc> bankAcc;
-	vector<Client> client;
 public:
 	void menu();
 	void addClient();
@@ -30,13 +29,12 @@ class BankAcc
 
 protected:
 	string accID;
+	Client* client;
 	double balance;
 	bool accType;
 
 public:
-	BankAcc() {
-
-	}
+	BankAcc(Client& client);
 	virtual ~BankAcc() {
 
 	}
@@ -46,8 +44,9 @@ public:
 	string getAccID();
 	double getBalance();
 	bool getAccType();
-	int withdraw(double amount);
-	int deposit(double amount);
+	Client* get_client();
+	virtual int withdraw(double amount);
+	virtual int deposit(double amount);
 	bool isFoundAccID(string id);
 	
 	
@@ -60,10 +59,12 @@ class SavingBankAcc :public BankAcc
 private:
 	double minimumBalance, minimumWithdraw;
 public:
-	SavingBankAcc() {
+	SavingBankAcc(Client& client): BankAcc(client){
 		minimumBalance = 1000.0;
 		minimumWithdraw = 100.0;
 	}
+	int withdraw(double amount);
+	int deposit(double amout);
 	virtual ~SavingBankAcc() {
 
 	}

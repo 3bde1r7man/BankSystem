@@ -51,7 +51,9 @@ void BankApp::addClient()
 
 void BankApp::List()
 {
-
+	for(int i=0;i<bankAcc.size();i++){
+		
+	}
 }
 
 void BankApp::withdraw()
@@ -78,7 +80,6 @@ BankApp::BankApp()
 		}
 	}
 	bankAcc.resize(count / 6);
-	client.resize(count / 6);
 	temp = "";
 	int i = 0;
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
@@ -89,16 +90,19 @@ BankApp::BankApp()
 		getline(dataFile, temp);
 		bankAcc[i].setBalance(stod(temp));
 		getline(dataFile, temp);
-		client[i].setName(temp);
+		bankAcc[i].get_client()->setName(temp);
 		getline(dataFile, temp);
-		client[i].setAddress(temp);
+		bankAcc[i].get_client()->setAddress(temp);
 		getline(dataFile, temp);
-		client[i].setPhone(temp);
+		bankAcc[i].get_client()->setPhone(temp);
 		i++;
 	}
 	dataFile.close();
 }
 //___________________________________BankAcc________________________________
+BankAcc::BankAcc(Client& client){
+	this->client = &client;
+}
 //-------------------------SETTER
 void BankAcc::setAccID(string id)
 {	
@@ -128,6 +132,11 @@ double BankAcc::getBalance()
 bool BankAcc::getAccType()
 {
 	return accType;
+}
+
+Client* BankAcc::get_client()
+{
+	return client;
 }
 //----------------------func
 int BankAcc::withdraw(double amount) 
