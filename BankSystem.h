@@ -35,17 +35,13 @@ class BankAcc
 
 protected:
 	string accID;
-	Client* client;
+	Client client;
 	double balance;
 	bool accType;
 
 public:
-
-
+	BankAcc() {}
 	BankAcc(Client& client);
-	BankAcc() {
-
-	}
 	virtual ~BankAcc() {
 
 	}
@@ -55,7 +51,7 @@ public:
 	string getAccID();
 	double getBalance();
 	int getAccType();
-	Client* get_client();
+	Client& get_client();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
 	bool isFoundAccID(string id);
