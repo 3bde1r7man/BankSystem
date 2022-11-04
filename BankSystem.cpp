@@ -225,7 +225,7 @@ BankApp::BankApp()
 	string temp;
 	dataFile.open("data.txt", ios::in);
 	int count{ 0 };
-	while (!dataFile.eof())
+	while (!dataFile.eof() && dataFile.peek() != EOF)
 	{
 		if (getline(dataFile, temp)) { // Count lines
 			count++;
