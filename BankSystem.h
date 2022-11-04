@@ -26,7 +26,7 @@ public:
 	string getName();
 	string getAddress();
 	string getPhone();
-	bool isValidPhoneNumber(string p);
+	bool isValidPhoneNumber(string& p);
 };
 
 
@@ -54,7 +54,7 @@ public:
 	Client& get_client();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
-	bool isFoundAccID(string id);
+	bool isFoundAccID(const string& id);
 };
 
 
