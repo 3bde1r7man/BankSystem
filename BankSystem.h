@@ -4,6 +4,7 @@
 #include <string>
 #include <regex>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -88,7 +89,7 @@ public:
 class BankApp
 {
 private:
-	vector<BankAcc> bankAcc;
+	vector<BankAcc*> bankAcc;
 public:
 	void menu();
 	void addClient();
