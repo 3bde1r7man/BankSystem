@@ -63,16 +63,16 @@ void BankApp::addClient()
 	if (cin)
 		cin.ignore();
 	getline(cin, name);
-	ba->get_client().setName(name);
+	ba->getClient().setName(name);
 	cout << "Please Enter Client Address =======> ";
 	getline(cin, address);
-	ba->get_client().setAddress(address);
+	ba->getClient().setAddress(address);
 	while (true)
 	{
 		cout << "Please Enter Client Phone =======> ";
 		cin >> phone;
-		if (ba->get_client().isValidPhoneNumber(phone)) {
-			ba->get_client().setPhone(phone);
+		if (ba->getClient().isValidPhoneNumber(phone)) {
+			ba->getClient().setPhone(phone);
 			break;
 		}
 		else
@@ -127,8 +127,8 @@ void BankApp::addClient()
 void BankApp::List()
 {
 	for (auto& i: bankAcc) {
-		cout << setfill('-') << std::setw(35) <<i->get_client().getName() << setfill('-') << std::setw(35) << ' ' << '\n';
-		cout << "Address: " << i->get_client().getAddress() << '\n';
+		cout << setfill('-') << std::setw(35) <<i->getClient().getName() << setfill('-') << std::setw(35) << ' ' << '\n';
+		cout << "Address: " << i->getClient().getAddress() << '\n';
 		cout << "Account ID: " << i->getAccID() << '\n';
 		cout << "Balance: " << i->getBalance() << '\n';
 		cout << setfill('-') << std::setw(70) << ' ' << '\n';
@@ -244,11 +244,11 @@ BankApp::BankApp()
 		getline(dataFile, temp);
 		bankAcc[i]->setBalance(stod(temp));
 		getline(dataFile, temp);
-		bankAcc[i]->get_client().setName(temp);
+		bankAcc[i]->getClient().setName(temp);
 		getline(dataFile, temp);
-		bankAcc[i]->get_client().setAddress(temp);
+		bankAcc[i]->getClient().setAddress(temp);
 		getline(dataFile, temp);
-		bankAcc[i]->get_client().setPhone(temp);
+		bankAcc[i]->getClient().setPhone(temp);
 		i++;
 	}
 	dataFile.close();
@@ -290,7 +290,7 @@ int BankAcc::getAccType()
 	return accType;
 }
 
-Client& BankAcc::get_client()
+Client& BankAcc::getClient()
 {
 	return client;
 }
