@@ -222,8 +222,14 @@ BankApp::~BankApp()
 {
 	fstream file("data.txt",ios::app);
 	for(int i=0;i<bankAcc.size();i++){
-		file<<bankAcc.at(i).
+		file<<bankAcc.at(i)->getAccID()<<endl;
+		file<<bankAcc.at(i)->getAccType()<<endl;
+		file<<bankAcc.at(i)->getBalance()<<endl;
+		file<<bankAcc.at(i)->get_client()->getName()<<endl;
+		file<<bankAcc.at(i)->get_client()->getAddress()<<endl;
+		file<<bankAcc.at(i)->get_client()->getPhone()<<endl;
 	}
+	file.close();
 
 }
 

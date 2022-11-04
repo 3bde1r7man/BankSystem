@@ -96,7 +96,5 @@ public:
 	void withdraw();
 	void deposit();
 	BankApp();
-	virtual ~BankApp() {
-
-	}
+	virtual ~BankApp();
 };
