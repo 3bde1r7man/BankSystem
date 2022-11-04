@@ -73,7 +73,7 @@ public:
 	virtual ~SavingBankAcc() {
 
 	}
-	int getMiniBalace() {
+	int getMiniBalance() {
 		return minimumBalance;
 	}
 	int getMIniWithdraw() {
