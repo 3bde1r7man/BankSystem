@@ -127,11 +127,11 @@ void BankApp::addClient()
 void BankApp::List()
 {
 	for (auto& i: bankAcc) {
-		cout << setfill('-') << std::setw(35) <<i->get_client().getName() << setfill('-') << std::setw(35) << ' ' << endl;
-		cout << "Address: " << i->get_client().getAddress() << endl;
-		cout << "Account ID: " << i->getAccID() << endl;
-		cout << "Balance: " << i->getBalance() << endl;
-		cout << setfill('-') << std::setw(70) << ' ' << endl;
+		cout << setfill('-') << std::setw(35) <<i->get_client().getName() << setfill('-') << std::setw(35) << ' ' << '\n';
+		cout << "Address: " << i->get_client().getAddress() << '\n';
+		cout << "Account ID: " << i->getAccID() << '\n';
+		cout << "Balance: " << i->getBalance() << '\n';
+		cout << setfill('-') << std::setw(70) << ' ' << '\n';
 	}
 }
 
@@ -143,21 +143,35 @@ void BankApp::withdraw()
 	cin >> accid;
 	for (auto& i: bankAcc) {
 		if (accid == i->getAccID()) {
-			cout << "Account ID: " << accid << endl;
+			cout << "Account ID: " << accid << '\n';
 			if (i->getAccType() == 1) {
-				cout << "Account Type: " << "Basic" << endl;
+				cout << "Account Type: " << "Basic" << '\n';
 				cout << "Balance: " << i->getBalance() << '\n';
-				cout << "Please Enter The Amount to Withdraw =========> ";
-				cin >> amount;
-				i->withdraw(amount);
+				while (true)
+				{
+					cout << "Please Enter The Amount to Withdraw =========> ";
+					cin >> amount;
+					if (i->withdraw(amount)) {
+						break;
+					}	
+				}
+				
 			}
 			else if (i->getAccType() == 2) {
-				cout << "Account Type: " << "Saving" << endl;
-				cout << "Balance: " << i->getBalance();
-				cout << "Please Enter The Amount to Withdraw =========> ";
-				cin >> amount;
-				i->withdraw(amount);
+				cout << "Account Type: " << "Saving" << '\n';
+				cout << "Balance: " << i->getBalance() << '\n';
+				while (true)
+				{
+					cout << "Please Enter The Amount to Withdraw =========> ";
+					cin >> amount;
+					if (((SavingBankAcc*)(i))->withdraw(amount)) {
+						break;
+					}
+				}
+				
 			}
+			cout << "Account ID: " << accid << '\n';
+			cout << "New Balance : " << i->getBalance() << '\n';
 		}
 	}
 }
@@ -170,21 +184,36 @@ void BankApp::deposit()
 	cin >> accid;
 	for (auto& i: bankAcc) {
 		if (accid == i->getAccID()) {
-			cout << "Account ID: " << accid << endl;
+			cout << "Account ID: " << accid << '\n';
 			if (i->getAccType() == 1) {
-				cout << "Account Type: " << "Basic" << endl;
-				cout << "Balance: " << i->getBalance();
-				cout << "Please Enter The Amount to Deposit =========> ";
-				cin >> amount;
-				i->deposit(amount);
+				cout << "Account Type: " << "Basic" << '\n';
+				cout << "Balance: " << i->getBalance() << '\n';
+				while (true)
+				{
+					cout << "Please Enter The Amount to Deposit =========> ";
+					cin >> amount;
+					if (i->deposit(amount)) {
+						break;
+					}	
+				}
+				
 			}
 			else if (i->getAccType() == 2) {
-				cout << "Account Type: " << "Saving" << endl;
-				cout << "Balance: " << i->getBalance();
-				cout << "Please Enter The Amount to Deposit =========> ";
-				cin >> amount;
-				((SavingBankAcc*)(i))->deposit(amount);
+				cout << "Account Type: " << "Saving" << '\n';
+				cout << "Balance: " << i->getBalance() << '\n';
+				while (true)
+				{
+					cout << "Please Enter The Amount to Deposit =========> ";
+					cin >> amount;
+					if (((SavingBankAcc*)(i))->deposit(amount)) {
+						break;
+					}
+				}
+				
 			}
+			cout << "Account ID: " << accid << '\n';
+			cout << "New Balance : " << i->getBalance() << '\n';
+				
 		}
 	}
 }
@@ -268,12 +297,29 @@ Client& BankAcc::get_client()
 //----------------------func
 int BankAcc::withdraw(double amount)
 {
-	return 0;
+	if (amount > balance) {
+		cout << "Sorry. This is more than what you can withdraw.\n";
+		return 0;
+	}
+	else
+	{
+		balance -= amount;
+		return 1;
+	}
 }
 
 int BankAcc::deposit(double amount)
 {
-	return 0;
+	if (amount > 0) {
+		balance += amount;
+		return 1;
+	}
+	else
+	{
+		cout << "Sorry, you can't deposit a negative value.\n";
+		return 0;
+	}
+	
 }
 
 bool BankAcc::isFoundAccID(const string& id)
@@ -323,10 +369,31 @@ bool Client::isValidPhoneNumber(string& p)
 //--------------------------SavingBankAcc----------------------------
 int SavingBankAcc::withdraw(double amount)
 {
-	return 0;
+	if (amount > balance) {
+		cout << "Sorry. This is more than what you can withdraw.\n";
+		return 0;
+	}
+	else
+	{
+		balance -= amount;
+		return 1;
+	}
 }
 
-int SavingBankAcc::deposit(double amout)
+int SavingBankAcc::deposit(double amount)
 {
-	return 0;
+	if (amount > minimumBalance) {
+		balance += amount;
+		return 1;
+	}
+	else if(amount > 0 && amount < minimumBalance)
+	{
+		cout << "Sorry, this is less than the minimum deposit value ($100).\n";
+		return	0;
+	}
+	else
+	{
+		cout << "Sorry, you can't deposit a negative value.\n";
+		return 0;
+	}
 }

@@ -69,7 +69,7 @@ public:
 		minimumWithdraw = 100.0;
 	}
 	int withdraw(double amount);
-	int deposit(double amout);
+	int deposit(double amount);
 	virtual ~SavingBankAcc() {
 
 	}
