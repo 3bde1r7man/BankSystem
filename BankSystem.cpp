@@ -7,12 +7,13 @@ void BankApp::menu()
 	int choice;
 	while (true)
 	{
-		cin >> choice;
 		cout << "Welcome to FCAI Banking Application\n";
 		cout << "1. Create a New Account\n";
 		cout << "2. List Clients and Accounts\n";
 		cout << "3. Withdraw Money\n";
 		cout << "4. Deposit Money\n";
+		cout << "Please Enter Choice =========> ";
+		cin >> choice;
 		if (choice >= 1 && choice <= 4) {
 			break;
 		}
@@ -114,7 +115,7 @@ void BankApp::addClient()
 	ba.setAccID("FCAI-" + to_string(bankAcc.size() + 1));
 	bankAcc.push_back(ba);
 	bankAcc.size();
-	cout << "An account was created with ID" << ba.getAccID() << " and Starting Balance " << balance << " L.E. ";
+	cout << "An account was created with ID " << ba.getAccID() << " and Starting Balance " << balance << " L.E. ";
 }
 
 void BankApp::List()
@@ -151,7 +152,9 @@ BankApp::BankApp()
 
 	temp = "";
 	int i = 0;
+	Client c;
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
+		
 		getline(dataFile, temp);
 		bankAcc[i].setAccID(temp);
 		getline(dataFile, temp);
@@ -169,7 +172,7 @@ BankApp::BankApp()
 	dataFile.close();
 }
 
-
+//___________________________________BankAcc________________________________
 BankAcc::BankAcc(Client& client)
 {
 	this->client = &client;
@@ -263,4 +266,14 @@ bool Client::isValidPhoneNumber(string p)
 		return true;
 	else
 		return false;
+}
+//--------------------------SavingBankAcc----------------------------
+int SavingBankAcc::withdraw(double amount)
+{
+	return 0;
+}
+
+int SavingBankAcc::deposit(double amout)
+{
+	return 0;
 }

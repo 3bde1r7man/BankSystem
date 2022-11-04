@@ -39,9 +39,12 @@ protected:
 	bool accType;
 
 public:
-	//___________________________________BankAcc________________________________
+	
 
 	BankAcc(Client& client);
+	BankAcc() {
+
+	}
 	virtual ~BankAcc() {
 
 	}
