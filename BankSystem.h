@@ -51,7 +51,7 @@ public:
 	string getAccID();
 	double getBalance();
 	int getAccType();
-	Client& get_client();
+	Client& getClient();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
 	bool isFoundAccID(const string& id);
