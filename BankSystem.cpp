@@ -108,7 +108,7 @@ void BankApp::addClient()
 		{
 			cout << "Please Enter the Starting Balance =========> ";
 			cin >> balance;
-			if (balance < s.getMiniBalace())
+			if (balance < s.getMiniBalance())
 			{
 				cout << "this is less than the starting balance!!\n";
 			}
