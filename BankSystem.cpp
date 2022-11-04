@@ -30,11 +30,13 @@ void BankApp::menu()
 			}
 			case 3:
 			{
-
+				bank.withdraw();
+				break;
 			}
 			case 4:
 			{
-
+				bank.deposit();
+				break;
 			}
 			default:
 				break;
@@ -51,7 +53,7 @@ void BankApp::menu()
 
 void BankApp::addClient()
 {
-	string name, address, phone, accID;
+	string name, address, phone;
 	int accType;
 	double balance;
 	Client c;
@@ -80,15 +82,15 @@ void BankApp::addClient()
 	}
 	while (true)
 	{
-		cout << "What Type of Account Do You Like? (1) Basic (2) Saving � Type 1 or 2 =========> ";
+		cout << "What Type of Account Do You Like? (1) Basic (2) Saving Type 1 or 2 =========> ";
 		cin >> accType;
 		if (accType == 1) {
-			break;
 			ba->setAccType(1);
+			break;
 		}
 		else if (accType == 2) {
-			break;
 			ba->setAccType(2);
+			break;
 		}
 		else
 		{
@@ -144,7 +146,7 @@ void BankApp::withdraw()
 			cout << "Account ID: " << accid << endl;
 			if (bankAcc.at(i)->getAccType() == 1) {
 				cout << "Account Type: " << "Basic" << endl;
-				cout << "Balance: " << bankAcc.at(i)->getBalance();
+				cout << "Balance: " << bankAcc.at(i)->getBalance() << '\n';
 				cout << "Please Enter The Amount to Withdraw =========> ";
 				cin >> amount;
 				bankAcc.at(i)->withdraw(amount);
