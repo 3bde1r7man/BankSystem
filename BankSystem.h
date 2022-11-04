@@ -40,7 +40,7 @@ protected:
 	bool accType;
 
 public:
-	
+
 
 	BankAcc(Client& client);
 	BankAcc() {

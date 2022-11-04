@@ -120,12 +120,12 @@ void BankApp::addClient()
 
 void BankApp::List()
 {
-	for(int i=0;i<bankAcc.size();i++){
-		cout<<setfill('-')<< std::setw(35) << bankAcc.at(i)->get_client()->getName() <<setfill('-')<< std::setw(35)<<' '<<endl;
-		cout<<"Address: "<<bankAcc.at(i)->get_client()->getAddress()<<endl;
-		cout<<"Account ID: "<<bankAcc.at(i)->getAccID()<<endl;
-		cout<<"Balance: "<<bankAcc.at(i)->getBalance()<<endl;
-		cout<<setfill('-')<< std::setw(70)<<' '<<endl;
+	for (int i = 0; i < bankAcc.size(); i++) {
+		cout << setfill('-') << std::setw(35) << bankAcc.at(i)->get_client()->getName() << setfill('-') << std::setw(35) << ' ' << endl;
+		cout << "Address: " << bankAcc.at(i)->get_client()->getAddress() << endl;
+		cout << "Account ID: " << bankAcc.at(i)->getAccID() << endl;
+		cout << "Balance: " << bankAcc.at(i)->getBalance() << endl;
+		cout << setfill('-') << std::setw(70) << ' ' << endl;
 	}
 }
 
@@ -133,23 +133,24 @@ void BankApp::withdraw()
 {
 	string accid;
 	double amount;
-	cout<<"Please Enter Account ID (e.g., FCAI-015) =========> ";
-	cin>>accid;
-	for(int i=0;i<bankAcc.size();i++){
-		if(accid==bankAcc.at(i)->getAccID()){
-			cout<<"Account ID: "<<accid<<endl;
-			if(bankAcc.at(i)->getAccType()==1){
-			cout<<"Account Type: "<<"Basic"<<endl;
-			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
-			cout<<"Please Enter The Amount to Withdraw =========> ";
-			cin>>amount;
-			bankAcc.at(i)->withdraw(amount);
-			}else if(bankAcc.at(i)->getAccType()==2){
-			cout<<"Account Type: "<<"Saving"<<endl;
-			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
-			cout<<"Please Enter The Amount to Withdraw =========> ";
-			cin>>amount;
-			bankAcc.at(i)->withdraw(amount);
+	cout << "Please Enter Account ID (e.g., FCAI-015) =========> ";
+	cin >> accid;
+	for (int i = 0; i < bankAcc.size(); i++) {
+		if (accid == bankAcc.at(i)->getAccID()) {
+			cout << "Account ID: " << accid << endl;
+			if (bankAcc.at(i)->getAccType() == 1) {
+				cout << "Account Type: " << "Basic" << endl;
+				cout << "Balance: " << bankAcc.at(i)->getBalance();
+				cout << "Please Enter The Amount to Withdraw =========> ";
+				cin >> amount;
+				bankAcc.at(i)->withdraw(amount);
+			}
+			else if (bankAcc.at(i)->getAccType() == 2) {
+				cout << "Account Type: " << "Saving" << endl;
+				cout << "Balance: " << bankAcc.at(i)->getBalance();
+				cout << "Please Enter The Amount to Withdraw =========> ";
+				cin >> amount;
+				bankAcc.at(i)->withdraw(amount);
 			}
 		}
 	}
@@ -179,7 +180,7 @@ BankApp::BankApp()
 	int i = 0;
 	Client c;
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
-		
+
 		getline(dataFile, temp);
 		bankAcc[i]->setAccID(temp);
 		getline(dataFile, temp);
