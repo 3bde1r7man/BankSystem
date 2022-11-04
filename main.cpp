@@ -3,6 +3,7 @@
 
 
 int main() {
-	BankApp bank;
-	bank.menu();
+	
+	
+    return 0;
 }

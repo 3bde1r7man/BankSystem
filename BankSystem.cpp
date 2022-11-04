@@ -7,12 +7,13 @@ void BankApp::menu()
 	int choice;
 	while (true)
 	{
-		cin >> choice;
 		cout << "Welcome to FCAI Banking Application\n";
 		cout << "1. Create a New Account\n";
 		cout << "2. List Clients and Accounts\n";
 		cout << "3. Withdraw Money\n";
 		cout << "4. Deposit Money\n";
+		cout << "Please Enter Choice =========> ";
+		cin >> choice;
 		if (choice >= 1 && choice <= 4) {
 			break;
 		}
@@ -42,16 +43,16 @@ void BankApp::menu()
 	default:
 		break;
 	}
-
+	return;
 }
 
 void BankApp::addClient()
 {
 	string name, address, phone, accID;
-	bool accType;
+	int accType;
 	double balance;
 	Client c;
-	BankAcc ba(c);
+	BankAcc* ba = new BankAcc(c);
 	SavingBankAcc s(c);
 	cout << "Please Enter Client Name =========> ";
 	cin.ignore();
@@ -76,15 +77,15 @@ void BankApp::addClient()
 	}
 	while (true)
 	{
-		cout << "What Type of Account Do You Like? (1) Basic (2) Saving – Type 1 or 2 =========> ";
+		cout << "What Type of Account Do You Like? (1) Basic (2) Saving ï¿½ Type 1 or 2 =========> ";
 		cin >> accType;
 		if (accType == 1) {
 			break;
-			ba.setAccType(1);
+			ba->setAccType(1);
 		}
 		else if (accType == 2) {
 			break;
-			ba.setAccType(2);
+			ba->setAccType(2);
 		}
 		else
 		{
@@ -107,30 +108,77 @@ void BankApp::addClient()
 			}
 			else
 			{
-				ba.setBalance(balance);
+				ba->setBalance(balance);
 			}
 		}
 	}
-	ba.setAccID("FCAI-" + to_string(bankAcc.size() + 1));
+	ba->setAccID("FCAI-" + to_string(bankAcc.size() + 1));
 	bankAcc.push_back(ba);
 	bankAcc.size();
-	cout << "An account was created with ID" << ba.getAccID() << " and Starting Balance " << balance << " L.E. ";
+	cout << "An account was created with ID " << ba->getAccID() << " and Starting Balance " << balance << " L.E. ";
 }
 
 void BankApp::List()
 {
-	for (int i = 0; i < bankAcc.size(); i++) {
-
+	for(int i=0;i<bankAcc.size();i++){
+		cout<<setfill('-')<< std::setw(35) << bankAcc.at(i)->get_client()->getName() <<setfill('-')<< std::setw(35)<<' '<<endl;
+		cout<<"Address: "<<bankAcc.at(i)->get_client()->getAddress()<<endl;
+		cout<<"Account ID: "<<bankAcc.at(i)->getAccID()<<endl;
+		cout<<"Balance: "<<bankAcc.at(i)->getBalance()<<endl;
+		cout<<setfill('-')<< std::setw(70)<<' '<<endl;
 	}
 }
 
 void BankApp::withdraw()
 {
-
+	string accid;
+	double amount;
+	cout<<"Please Enter Account ID (e.g., FCAI-015) =========> ";
+	cin>>accid;
+	for(int i=0;i<bankAcc.size();i++){
+		if(accid==bankAcc.at(i)->getAccID()){
+			cout<<"Account ID: "<<accid<<endl;
+			if(bankAcc.at(i)->getAccType()==1){
+			cout<<"Account Type: "<<"Basic"<<endl;
+			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
+			cout<<"Please Enter The Amount to Withdraw =========> ";
+			cin>>amount;
+			bankAcc.at(i)->withdraw(amount);
+			}else if(bankAcc.at(i)->getAccType()==2){
+			cout<<"Account Type: "<<"Saving"<<endl;
+			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
+			cout<<"Please Enter The Amount to Withdraw =========> ";
+			cin>>amount;
+			((SavingBankAcc*)(bankAcc.at(i)))->withdraw(amount);
+			}
+		}
+	}
 }
 
 void BankApp::deposit()
 {
+	string accid;
+	double amount;
+	cout<<"Please Enter Account ID (e.g., FCAI-015) =========> ";
+	cin>>accid;
+	for(int i=0;i<bankAcc.size();i++){
+		if(accid==bankAcc.at(i)->getAccID()){
+			cout<<"Account ID: "<<accid<<endl;
+			if(bankAcc.at(i)->getAccType()==1){
+			cout<<"Account Type: "<<"Basic"<<endl;
+			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
+			cout<<"Please Enter The Amount to Deposit =========> ";
+			cin>>amount;
+			bankAcc.at(i)->deposit(amount);
+			}else if(bankAcc.at(i)->getAccType()==2){
+			cout<<"Account Type: "<<"Saving"<<endl;
+			cout<<"Balance: "<<bankAcc.at(i)->getBalance();
+			cout<<"Please Enter The Amount to Deposit =========> ";
+			cin>>amount;
+			((SavingBankAcc*)(bankAcc.at(i)))->deposit(amount);
+			}
+		}
+	}
 
 }
 
@@ -151,25 +199,35 @@ BankApp::BankApp()
 
 	temp = "";
 	int i = 0;
+	Client c;
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
+		
 		getline(dataFile, temp);
-		bankAcc[i].setAccID(temp);
+		bankAcc[i]->setAccID(temp);
 		getline(dataFile, temp);
-		bankAcc[i].setAccType(bool(stoi(temp)));
+		bankAcc[i]->setAccType(bool(stoi(temp)));
 		getline(dataFile, temp);
-		bankAcc[i].setBalance(stod(temp));
+		bankAcc[i]->setBalance(stod(temp));
 		getline(dataFile, temp);
-		bankAcc[i].get_client()->setName(temp);
+		bankAcc[i]->get_client()->setName(temp);
 		getline(dataFile, temp);
-		bankAcc[i].get_client()->setAddress(temp);
+		bankAcc[i]->get_client()->setAddress(temp);
 		getline(dataFile, temp);
-		bankAcc[i].get_client()->setPhone(temp);
+		bankAcc[i]->get_client()->setPhone(temp);
 		i++;
 	}
 	dataFile.close();
 }
+BankApp::~BankApp()
+{
+	fstream file("data.txt",ios::app);
+	for(int i=0;i<bankAcc.size();i++){
+		file<<bankAcc.at(i).
+	}
 
+}
 
+//___________________________________BankAcc________________________________
 BankAcc::BankAcc(Client& client)
 {
 	this->client = &client;
@@ -212,19 +270,54 @@ Client* BankAcc::get_client()
 //----------------------func
 int BankAcc::withdraw(double amount)
 {
+	if (this->balance >=amount){
+		this->balance -= amount;
+		cout<<"Thank you. "<<endl;
+		cout<<"Account ID: "<<this->accID<<endl;
+		cout<<"Balance: "<<this->getBalance()<<endl;
+	}else{
+		cout<<"Sorry. This is more than what you can withdraw."<<endl;
+	}
 	return 0;
 }
 
 int BankAcc::deposit(double amount)
 {
+	this->balance += amount;
 	return 0;
 }
 
-bool BankAcc::isFoundAccID(string id)
-{
-	return false;
-}
 
+//_____________________________SavingAcc_____________________________
+int  SavingBankAcc::withdraw(double amount)
+{
+	if(amount>= this->minimumBalance){
+		if (this->balance >=amount){
+			this->balance -= amount;
+			cout<<"Thank you. "<<endl;
+			cout<<"Account ID: "<<this->accID<<endl;
+			cout<<"Balance: "<<this->getBalance()<<endl;
+		}else{
+			cout<<"Sorry. This is more than what you can withdraw."<<endl;
+		}
+	}else{
+		cout<<"Sorry. This is below the minimum balance."<<endl;
+	}
+	return 0;
+}
+int SavingBankAcc::deposit(double amount)
+{
+	if(amount>=100){
+		this->balance += amount;
+		cout<<"Thank You."<<endl;
+		cout<<"Account ID: "<<this->accID<<endl;
+		cout<<"Balance: "<<this->getBalance()<<endl;
+	}else{
+		cout<<"Sorry this below 100 L.E"<<endl;
+
+	}
+	return 0;
+}
 //_____________________________client________________________________
 //-------------------------SETTER
 void Client::setName(string n)
@@ -263,4 +356,13 @@ bool Client::isValidPhoneNumber(string p)
 		return true;
 	else
 		return false;
+}
+
+
+
+int main() {
+	BankApp bank;
+	bank.menu();
+	
+    return 0;
 }

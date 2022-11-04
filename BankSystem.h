@@ -4,6 +4,7 @@
 #include <string>
 #include <regex>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -39,9 +40,12 @@ protected:
 	bool accType;
 
 public:
-	//___________________________________BankAcc________________________________
+	
 
 	BankAcc(Client& client);
+	BankAcc() {
+
+	}
 	virtual ~BankAcc() {
 
 	}
@@ -54,7 +58,6 @@ public:
 	Client* get_client();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
-	bool isFoundAccID(string id);
 };
 
 
@@ -85,7 +88,7 @@ public:
 class BankApp
 {
 private:
-	vector<BankAcc> bankAcc;
+	vector<BankAcc*> bankAcc;
 public:
 	void menu();
 	void addClient();
