@@ -120,7 +120,6 @@ void BankApp::addClient()
 	}
 	ba->setAccID("FCAI-" + to_string(bankAcc.size() + 1));
 	bankAcc.push_back(ba);
-	bankAcc.size();
 	cout << "An account was created with ID " << ba->getAccID() << " and Starting Balance " << balance << " L.E. ";
 }
 
@@ -252,6 +251,11 @@ BankApp::BankApp()
 		i++;
 	}
 	dataFile.close();
+}
+
+BankApp::~BankApp()
+{
+	
 }
 
 //___________________________________BankAcc________________________________
