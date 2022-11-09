@@ -4,5 +4,5 @@
 
 int main() {
 	BankApp bank;
-	bank.menu();
+	bank.menu(bank);
 }

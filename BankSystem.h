@@ -37,10 +37,10 @@ protected:
 	string accID;
 	Client client;
 	double balance;
-	bool accType;
+	int accType;
 
 public:
-	BankAcc() {}
+	BankAcc(){}
 	BankAcc(Client& client);
 	virtual ~BankAcc() {
 
@@ -87,7 +87,7 @@ class BankApp
 private:
 	vector<BankAcc*> bankAcc;
 public:
-	void menu();
+	void menu(BankApp&);
 	void addClient();
 	void List();
 	void withdraw();
