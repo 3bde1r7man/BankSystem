@@ -1,52 +1,51 @@
 #include "BankSystem.h"
 
 //_______________________________BankApp___________________________________
-void BankApp::menu()
+void BankApp::menu(BankApp& b)
 {
-	BankApp bank;
+	
 	int choice;
-	while (true)
-	{
+	
 
-		cout << "Welcome to FCAI Banking Application\n";
-		cout << "1. Create a New Account\n";
-		cout << "2. List Clients and Accounts\n";
-		cout << "3. Withdraw Money\n";
-		cout << "4. Deposit Money\n";
-		cout << "Please Enter Choice =========> ";
-		cin >> choice;
-		if (choice >= 1 && choice <= 4) {
-			switch (choice)
-			{
-			case 1:
-			{
-				bank.addClient();
-				break;
-			}
-			case 2:
-			{
-				bank.List();
-				break;
-			}
-			case 3:
-			{
-				bank.withdraw();
-				break;
-			}
-			case 4:
-			{
-				bank.deposit();
-				break;
-			}
-			default:
-				break;
-			}
-		}
-		else
+	cout << "Welcome to FCAI Banking Application\n";
+	cout << "1. Create a New Account\n";
+	cout << "2. List Clients and Accounts\n";
+	cout << "3. Withdraw Money\n";
+	cout << "4. Deposit Money\n";
+	cout << "Please Enter Choice =========> ";
+	cin >> choice;
+	if (choice >= 1 && choice <= 4) {
+		switch (choice)
 		{
-			cout << "invalid Choice!!\n";
+		case 1:
+		{
+			b.addClient();
+			break;
+		}
+		case 2:
+		{
+			b.List();
+			break;
+		}
+		case 3:
+		{
+			b.withdraw();
+			break;
+		}
+		case 4:
+		{
+			b.deposit();
+			break;
+		}
+		default:
+			break;
 		}
 	}
+	else
+	{
+		cout << "invalid Choice!!\n";
+	}
+	
 	
 
 }
@@ -85,11 +84,11 @@ void BankApp::addClient()
 		cout << "What Type of Account Do You Like? (1) Basic (2) Saving Type 1 or 2 =========> ";
 		cin >> accType;
 		if (accType == 1) {
-			ba->setAccType(1);
+			ba->setAccType(accType);
 			break;
 		}
 		else if (accType == 2) {
-			ba->setAccType(2);
+			ba->setAccType(accType);
 			break;
 		}
 		else
@@ -118,7 +117,8 @@ void BankApp::addClient()
 			}
 		}
 	}
-	ba->setAccID("FCAI-" + to_string(bankAcc.size() + 1));
+	string temp = "FCAI-" + to_string(bankAcc.size() + 1);
+	ba->setAccID(temp);
 	bankAcc.push_back(ba);
 	cout << "An account was created with ID " << ba->getAccID() << " and Starting Balance " << balance << " L.E. ";
 }
@@ -230,16 +230,16 @@ BankApp::BankApp()
 			count++;
 		}
 	}
-	bankAcc.resize(count / 6);
-
+	dataFile.close();
+	bankAcc.resize(count/6);
 	int i = 0;
-	
+	dataFile.open("data.txt", ios::in);
 	while (!dataFile.eof() && dataFile.peek() != EOF) {
-
+		bankAcc[i] = new BankAcc;
 		getline(dataFile, temp);
 		bankAcc[i]->setAccID(temp);
 		getline(dataFile, temp);
-		bankAcc[i]->setAccType(bool(stoi(temp)));
+		bankAcc[i]->setAccType(stoi(temp));
 		getline(dataFile, temp);
 		bankAcc[i]->setBalance(stod(temp));
 		getline(dataFile, temp);
@@ -255,6 +255,20 @@ BankApp::BankApp()
 
 BankApp::~BankApp()
 {
+	fstream dataFile;
+	string temp;
+	dataFile.open("data.txt", ios::out);
+	for (int i = 0; i < bankAcc.size(); i++)
+	{
+		dataFile << bankAcc[i]->getAccID() << '\n';
+		dataFile << bankAcc[i]->getAccType() << '\n';
+		dataFile << bankAcc[i]->getBalance() << '\n';
+		dataFile << bankAcc[i]->getClient().getName() << '\n';
+		dataFile << bankAcc[i]->getClient().getAddress() << '\n';
+		dataFile << bankAcc[i]->getClient().getPhone() << '\n';
+	}
+	dataFile.close();
+	
 	
 }
 
@@ -266,6 +280,7 @@ BankAcc::BankAcc(Client& client)
 //-------------------------SETTER
 void BankAcc::setAccID(string id)
 {
+	
 	accID = move(id);
 }
 
@@ -278,6 +293,8 @@ void BankAcc::setAccType(int type)
 {
 	accType = move(type);
 }
+
+
 //-----------------------GETTER
 string BankAcc::getAccID()
 {
