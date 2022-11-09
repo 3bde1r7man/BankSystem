@@ -40,7 +40,7 @@ protected:
 	int accType;
 
 public:
-	BankAcc(){}
+	BankAcc() = default;
 	BankAcc(Client& client);
 	virtual ~BankAcc() {
 
@@ -54,7 +54,6 @@ public:
 	Client& getClient();
 	virtual int withdraw(double amount);
 	virtual int deposit(double amount);
-	bool isFoundAccID(const string& id);
 };
 
 

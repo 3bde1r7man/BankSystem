@@ -343,11 +343,6 @@ int BankAcc::deposit(double amount)
 	
 }
 
-bool BankAcc::isFoundAccID(const string& id)
-{
-	return false;
-}
-
 //_____________________________client________________________________
 //-------------------------SETTER
 void Client::setName(string n)
