@@ -130,8 +130,11 @@
     <ClInclude Include="BankSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BankAcc.cpp" />
     <ClCompile Include="BankSystem.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SavingBankAcc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />
