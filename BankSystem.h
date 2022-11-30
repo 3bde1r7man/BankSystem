@@ -92,5 +92,9 @@ public:
 	void withdraw();
 	void deposit();
 	BankApp();
+	BankApp(const BankApp& other) :bankAcc{ other.bankAcc } {};       // Copy constructor
+	BankApp(BankApp&& other) :bankAcc{ other.bankAcc } {};			  // Move constructor
+	BankApp& operator=(BankApp& other);  // Assignment operator
+	BankApp& operator=(BankApp&& other); // Move assignment
 	virtual ~BankApp();
 };

@@ -253,6 +253,30 @@ BankApp::BankApp()
 	dataFile.close();
 }
 
+BankApp& BankApp::operator=(BankApp& other)
+{
+	if (this != &other) {
+		for (int i = 0; i < bankAcc.size(); i++)
+		{
+			delete [] bankAcc[i];
+		}
+		bankAcc = other.bankAcc;
+	}
+	return *this;
+}
+
+BankApp& BankApp::operator=(BankApp&& other)
+{
+	if (this != &other) {
+		for (int i = 0; i < bankAcc.size(); i++)
+		{
+			delete[] bankAcc[i];
+		}
+		bankAcc = other.bankAcc;
+	}
+	return *this;
+}
+
 BankApp::~BankApp()
 {
 	fstream dataFile;
