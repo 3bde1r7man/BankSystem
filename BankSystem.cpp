@@ -265,7 +265,7 @@ BankApp& BankApp::operator=(BankApp& other)
 	return *this;
 }
 
-BankApp& BankApp::operator=(BankApp&& other)
+BankApp& BankApp::operator=(BankApp&& other) noexcept
 {
 	if (this != &other) {
 		for (int i = 0; i < bankAcc.size(); i++)
